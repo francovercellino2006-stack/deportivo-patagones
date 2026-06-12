@@ -113,8 +113,18 @@ export const mockEventos = [
   },
 ];
 
-export const mockCuotas = {
-  status: "al-dia" as "al-dia" | "por-vencer" | "deuda",
+type CuotaItem =
+  | { id: string; mes: string; monto: number; estado: "pendiente"; vencimiento: string }
+  | { id: string; mes: string; monto: number; estado: "pagado"; fechaPago: string; comprobante: string }
+  | { id: string; mes: string; monto: number; estado: "vencida" };
+
+export const mockCuotas: {
+  status: "al-dia" | "por-vencer" | "deuda";
+  balance: number;
+  proxVencimiento: string;
+  historial: CuotaItem[];
+} = {
+  status: "al-dia",
   balance: 0,
   proxVencimiento: "2026-07-15",
   historial: [

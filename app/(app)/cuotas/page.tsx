@@ -42,7 +42,9 @@ export default function CuotasPage() {
           <CardContent className="py-5">
             <p className="text-white/70 text-sm mb-1">Tenés una cuota pendiente</p>
             <p className="text-white text-3xl font-bold mb-0.5">{formatCurrency(pendiente.monto)}</p>
-            <p className="text-white/70 text-sm">{pendiente.mes} · Vence {formatDate(pendiente.vencimiento ?? "", { day: "numeric", month: "long" })}</p>
+            {"vencimiento" in pendiente && (
+              <p className="text-white/70 text-sm">{pendiente.mes} · Vence {formatDate(pendiente.vencimiento, { day: "numeric", month: "long" })}</p>
+            )}
             <Button className="mt-4 bg-white text-vc-blue hover:bg-white/90 w-full" size="lg">
               <CreditCard className="w-4 h-4" /> Pagar con Mercado Pago
             </Button>
