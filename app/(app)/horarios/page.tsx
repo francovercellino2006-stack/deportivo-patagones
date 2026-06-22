@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Horarios" };
 const deportes = ["Todos", "Fútbol", "Básquet", "Hockey", "Patín", "Gimnasia"];
 
 const sportConfig: Record<string, { gradient: string; dot: string; lightBg: string; textColor: string }> = {
-  "Fútbol":   { gradient: "from-[#C8102E] to-[#e8173a]", dot: "bg-[#C8102E]",  lightBg: "bg-[#C8102E]/8",  textColor: "text-[#C8102E]"  },
+  "Fútbol":   { gradient: "from-[#15803D] to-[#22C55E]", dot: "bg-[#15803D]",  lightBg: "bg-[#15803D]/8",  textColor: "text-[#15803D]"  },
   "Básquet":  { gradient: "from-[#1d4ed8] to-[#3b82f6]", dot: "bg-[#1d4ed8]",  lightBg: "bg-[#1d4ed8]/8",  textColor: "text-[#1d4ed8]"  },
   "Hockey":   { gradient: "from-[#0d9488] to-[#14b8a6]", dot: "bg-[#0d9488]",  lightBg: "bg-[#0d9488]/8",  textColor: "text-[#0d9488]"  },
   "Patín":    { gradient: "from-[#7c3aed] to-[#a78bfa]", dot: "bg-[#7c3aed]",  lightBg: "bg-[#7c3aed]/8",  textColor: "text-[#7c3aed]"  },
@@ -36,7 +36,7 @@ export default function HorariosPage() {
               key={d}
               className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 i === 0
-                  ? "bg-[#C8102E] text-white shadow-sm"
+                  ? "bg-[#15803D] text-white shadow-sm"
                   : "bg-white border border-[#E8ECF4] text-[#8892A4] hover:text-[#0D1117]"
               }`}
             >

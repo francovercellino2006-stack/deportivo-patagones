@@ -20,8 +20,8 @@ export default function LandingPage() {
           <div className="flex items-center gap-2.5">
             <VCLogoCircle size={34} />
             <div className="leading-none">
-              <p className="text-white font-black text-sm tracking-tight">Villa Congreso</p>
-              <p className="text-white/50 text-[10px]">Club Atlético · 1928</p>
+              <p className="text-white font-black text-sm tracking-tight">Deportivo Patagones</p>
+              <p className="text-white/50 text-[10px]">Club Atlético · Patagones</p>
             </div>
           </div>
           <Link
@@ -45,7 +45,7 @@ export default function LandingPage() {
 
         <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full mb-5">
           <span className="w-1.5 h-1.5 bg-vc-red rounded-full animate-pulse" />
-          Club Atlético Villa Congreso · Viedma, Río Negro · Fundado 1928
+          Club Atlético Deportivo Patagones · Carmen de Patagones · Carmen de Patagones, Bs.As.
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-none mb-5 text-white">
@@ -105,7 +105,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-6 text-center text-xs text-white/30">
-        <p>© 2026 Club Atlético Villa Congreso · Viedma, Río Negro · Fundado el 2 de agosto de 1928</p>
+        <p>© 2026 Club Atlético Deportivo Patagones · Carmen de Patagones · C. de Patagones, Buenos Aires</p>
       </footer>
     </div>
   );

@@ -17,8 +17,8 @@ export function TopBar({ className }: { className?: string }) {
         <Link href="/inicio" className="flex items-center gap-2.5">
           <Image src="/escudo.png" alt="VC" width={34} height={33} className="shrink-0 drop-shadow-sm" />
           <div className="leading-none">
-            <p className="text-[#0D1117] font-black text-sm tracking-tight">Villa Congreso</p>
-            <p className="text-[#8892A4] text-[10px] font-medium">Club Atlético · Viedma</p>
+            <p className="text-[#0D1117] font-black text-sm tracking-tight">Deportivo Patagones</p>
+            <p className="text-[#8892A4] text-[10px] font-medium">Club Atlético · Patagones</p>
           </div>
         </Link>
 
@@ -29,9 +29,9 @@ export function TopBar({ className }: { className?: string }) {
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#C8102E] rounded-full ring-2 ring-white" />
           </button>
           <Link href="/perfil">
-            <Avatar className="w-8 h-8 cursor-pointer ring-2 ring-[#C8102E]/20 hover:ring-[#C8102E]/50 transition-all">
+            <Avatar className="w-8 h-8 cursor-pointer ring-2 ring-[#15803D]/20 hover:ring-[#15803D]/50 transition-all">
               <AvatarImage src="" alt={mockUser.name} />
-              <AvatarFallback className="bg-[#C8102E] text-white text-xs font-bold">
+              <AvatarFallback className="bg-[#15803D] text-white text-xs font-bold">
                 {mockUser.name.split(" ").map(n => n[0]).slice(0,2).join("")}
               </AvatarFallback>
             </Avatar>

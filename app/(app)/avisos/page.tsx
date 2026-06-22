@@ -14,11 +14,11 @@ const tipoCfg: Record<AvisoTipo, { label: string; bg: string; text: string; dot:
   suspensión:   { label: "Suspendido",   bg: "bg-[#C8102E]/8",        text: "text-[#C8102E]",   dot: "bg-[#C8102E]"   },
   recordatorio: { label: "Recordatorio", bg: "bg-amber-50",            text: "text-amber-700",   dot: "bg-amber-500"   },
   resultado:    { label: "Resultado",    bg: "bg-emerald-50",          text: "text-emerald-700", dot: "bg-emerald-500" },
-  convocatoria: { label: "Convocatoria", bg: "bg-[#C8102E]/8",         text: "text-[#C8102E]",   dot: "bg-[#C8102E]"   },
+  convocatoria: { label: "Convocatoria", bg: "bg-[#15803D]/8",         text: "text-[#15803D]",   dot: "bg-[#15803D]"   },
 };
 
 const avatarColor: Record<string, string> = {
-  "Fútbol":   "bg-[#C8102E]/10 text-[#C8102E]",
+  "Fútbol":   "bg-[#15803D]/10 text-[#15803D]",
   "Básquet":  "bg-[#1d4ed8]/10 text-[#1d4ed8]",
   "Hockey":   "bg-[#0d9488]/10 text-[#0d9488]",
   "Patín":    "bg-[#7c3aed]/10 text-[#7c3aed]",
@@ -42,12 +42,12 @@ function AvisoCard({ aviso }: { aviso: typeof mockAvisos[0] }) {
   const profe = mockProfesores.find(p => p.id === aviso.profesorId);
   const short = aviso.contenido.length > 160;
   const texto = !short || expanded ? aviso.contenido : aviso.contenido.slice(0, 160) + "…";
-  const av    = avatarColor[aviso.deporte] ?? "bg-[#C8102E]/10 text-[#C8102E]";
+  const av    = avatarColor[aviso.deporte] ?? "bg-[#15803D]/10 text-[#15803D]";
 
   return (
-    <Card className={`overflow-hidden transition-shadow hover:shadow-[0_4px_16px_0_rgb(0_0_0/0.08)] ${aviso.fijado ? "border-[#C8102E]/30" : ""}`}>
+    <Card className={`overflow-hidden transition-shadow hover:shadow-[0_4px_16px_0_rgb(0_0_0/0.08)] ${aviso.fijado ? "border-[#15803D]/30" : ""}`}>
       {aviso.fijado && (
-        <div className="h-1 bg-gradient-to-r from-[#C8102E] to-[#e8173a]" />
+        <div className="h-1 bg-gradient-to-r from-[#15803D] to-[#22C55E]" />
       )}
       <CardContent className="py-4">
 
@@ -62,7 +62,7 @@ function AvisoCard({ aviso }: { aviso: typeof mockAvisos[0] }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="text-sm font-bold text-[#0D1117]">{aviso.profesorName}</span>
-              {aviso.fijado && <Pin className="w-3 h-3 text-[#C8102E]" />}
+              {aviso.fijado && <Pin className="w-3 h-3 text-[#15803D]" />}
             </div>
             <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
               <span className="text-[10px] font-semibold text-[#8892A4]">{aviso.deporte}</span>
@@ -86,7 +86,7 @@ function AvisoCard({ aviso }: { aviso: typeof mockAvisos[0] }) {
           {short && (
             <button
               onClick={() => setExpanded(e => !e)}
-              className="flex items-center gap-1 text-xs text-[#C8102E] font-semibold mt-2 hover:underline"
+              className="flex items-center gap-1 text-xs text-[#15803D] font-semibold mt-2 hover:underline"
             >
               {expanded
                 ? <><ChevronUp className="w-3.5 h-3.5" /> Ver menos</>
@@ -119,7 +119,7 @@ export default function AvisosPage() {
         action={
           <Link
             href="/mi-panel"
-            className="flex items-center gap-1.5 bg-[#C8102E] text-white text-xs font-bold px-3.5 h-8 rounded-full hover:bg-[#8B0000] transition-colors shadow-sm"
+            className="flex items-center gap-1.5 bg-[#15803D] text-white text-xs font-bold px-3.5 h-8 rounded-full hover:bg-[#052E16] transition-colors shadow-sm"
           >
             <Megaphone className="w-3.5 h-3.5" /> Mi panel
           </Link>
@@ -134,7 +134,7 @@ export default function AvisosPage() {
             onClick={() => setFiltro(d)}
             className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
               filtro === d
-                ? "bg-[#C8102E] text-white shadow-sm"
+                ? "bg-[#15803D] text-white shadow-sm"
                 : "bg-white border border-[#E8ECF4] text-[#8892A4] hover:text-[#0D1117]"
             }`}
           >

@@ -9,7 +9,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-dvh flex flex-col bg-[#F4F6FA]">
       {/* Top section — brand */}
-      <div className="bg-gradient-to-b from-[#C8102E] to-[#8B0000] pt-safe pb-12 px-5 flex flex-col">
+      <div className="bg-gradient-to-b from-[#15803D] to-[#052E16] pt-safe pb-12 px-5 flex flex-col">
         <Link href="/" className="flex items-center gap-1.5 text-sm text-white/60 mt-4 mb-8 hover:text-white transition-colors self-start">
           <ArrowLeft className="w-4 h-4" /> Volver
         </Link>
@@ -17,10 +17,10 @@ export default function LoginPage() {
         <div className="flex flex-col items-center text-center">
           <div className="relative mb-5">
             <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150" />
-            <Image src="/escudo.png" alt="Villa Congreso" width={90} height={88} className="relative drop-shadow-2xl" />
+            <Image src="/escudo.png" alt="Deportivo Patagones" width={90} height={88} className="relative drop-shadow-2xl" />
           </div>
-          <h1 className="text-2xl font-black text-white tracking-tight">Villa Congreso</h1>
-          <p className="text-sm text-white/60 mt-1">Club Atlético · Viedma, Río Negro</p>
+          <h1 className="text-2xl font-black text-white tracking-tight">Deportivo Patagones</h1>
+          <p className="text-sm text-white/60 mt-1">Club Atlético · Carmen de Patagones</p>
         </div>
       </div>
 
@@ -51,15 +51,15 @@ export default function LoginPage() {
             <input
               type="email"
               placeholder="correo@ejemplo.com"
-              className="w-full h-11 px-4 rounded-xl border border-[#E8ECF4] bg-[#F4F6FA] text-sm text-[#0D1117] placeholder:text-[#8892A4] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-transparent transition-all"
+              className="w-full h-11 px-4 rounded-xl border border-[#E8ECF4] bg-[#F4F6FA] text-sm text-[#0D1117] placeholder:text-[#8892A4] focus:outline-none focus:ring-2 focus:ring-[#15803D] focus:border-transparent transition-all"
             />
             <input
               type="password"
               placeholder="Contraseña"
-              className="w-full h-11 px-4 rounded-xl border border-[#E8ECF4] bg-[#F4F6FA] text-sm text-[#0D1117] placeholder:text-[#8892A4] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-transparent transition-all"
+              className="w-full h-11 px-4 rounded-xl border border-[#E8ECF4] bg-[#F4F6FA] text-sm text-[#0D1117] placeholder:text-[#8892A4] focus:outline-none focus:ring-2 focus:ring-[#15803D] focus:border-transparent transition-all"
             />
             <Link href="/inicio">
-              <button className="w-full h-11 bg-[#C8102E] text-white rounded-xl text-sm font-bold hover:bg-[#8B0000] transition-colors flex items-center justify-center gap-2 mt-1 shadow-sm">
+              <button className="w-full h-11 bg-[#15803D] text-white rounded-xl text-sm font-bold hover:bg-[#052E16] transition-colors flex items-center justify-center gap-2 mt-1 shadow-sm">
                 Ingresar <ArrowRight className="w-4 h-4" />
               </button>
             </Link>
@@ -67,7 +67,7 @@ export default function LoginPage() {
 
           <p className="text-center text-xs text-[#8892A4] mt-4">
             ¿No tenés acceso?{" "}
-            <a href="#" className="text-[#C8102E] font-semibold">Contactá al club</a>
+            <a href="#" className="text-[#15803D] font-semibold">Contactá al club</a>
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function LoginPage() {
         </Link>
 
         <p className="text-center text-[10px] text-[#8892A4] mt-6">
-          Club Atlético Villa Congreso · Fundado el 2 de agosto de 1928
+          Club Atlético Deportivo Patagones · Fundado el 2 de agosto de 1928
         </p>
       </div>
     </div>

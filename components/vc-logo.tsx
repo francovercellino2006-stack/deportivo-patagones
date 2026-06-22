@@ -5,7 +5,7 @@ export function VCShield({ size = 40, className }: { size?: number; className?: 
   return (
     <Image
       src="/escudo.png"
-      alt="Escudo Villa Congreso"
+      alt="Escudo Deportivo Patagones"
       width={size}
       height={Math.round(size * 206 / 212)}
       className={className}
@@ -17,7 +17,7 @@ export function VCLogoCircle({ size = 40, className }: { size?: number; classNam
   return (
     <Image
       src="/escudo.png"
-      alt="Villa Congreso"
+      alt="Deportivo Patagones"
       width={size}
       height={Math.round(size * 206 / 212)}
       className={cn("rounded-2xl", className)}

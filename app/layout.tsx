@@ -6,10 +6,10 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: { default: "Villa Congreso", template: "%s · Villa Congreso" },
-  description: "La plataforma del Club Atlético Villa Congreso de Viedma",
+  title: { default: "Deportivo Patagones", template: "%s · Deportivo Patagones" },
+  description: "La plataforma del Club Atlético Deportivo Patagones de Viedma",
   manifest: "/manifest.json",
-  appleWebApp: { capable: true, statusBarStyle: "default", title: "Villa Congreso" },
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Deportivo Patagones" },
 };
 
 export const viewport: Viewport = {

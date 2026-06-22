@@ -39,7 +39,7 @@ export default function CalendarioPage() {
               <div className="flex items-center gap-3 mb-3 sticky top-[57px] bg-[#F4F6FA] py-1 z-10">
                 <div className={`flex flex-col items-center w-11 h-11 rounded-2xl justify-center shrink-0 shadow-sm ${
                   isToday
-                    ? "bg-gradient-to-br from-[#C8102E] to-[#a50020]"
+                    ? "bg-gradient-to-br from-[#15803D] to-[#0F6B30]"
                     : "bg-white border border-[#E8ECF4]"
                 }`}>
                   <span className={`text-base font-black leading-none ${isToday ? "text-white" : "text-[#0D1117]"}`}>
@@ -52,7 +52,7 @@ export default function CalendarioPage() {
                   </span>
                 </div>
                 <div>
-                  <p className={`text-sm font-bold ${isToday ? "text-[#C8102E]" : "text-[#0D1117]"}`}>
+                  <p className={`text-sm font-bold ${isToday ? "text-[#15803D]" : "text-[#0D1117]"}`}>
                     {isToday ? "Hoy" : d.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })}
                   </p>
                   <p className="text-[10px] text-[#8892A4]">{dayItems.length} actividades</p>

@@ -28,19 +28,19 @@ export function BottomNav() {
             >
               <div className={cn(
                 "flex items-center justify-center w-11 h-7 rounded-full transition-all duration-200",
-                active ? "bg-[#C8102E]/10" : ""
+                active ? "bg-[#15803D]/10" : ""
               )}>
                 <Icon
                   className={cn(
                     "w-5 h-5 transition-all duration-200",
-                    active ? "text-[#C8102E]" : "text-[#9399ab]"
+                    active ? "text-[#15803D]" : "text-[#9399ab]"
                   )}
                   strokeWidth={active ? 2.5 : 1.8}
                 />
               </div>
               <span className={cn(
                 "text-[10px] truncate transition-all duration-200",
-                active ? "text-[#C8102E] font-semibold" : "text-[#9399ab] font-medium"
+                active ? "text-[#15803D] font-semibold" : "text-[#9399ab] font-medium"
               )}>
                 {label}
               </span>

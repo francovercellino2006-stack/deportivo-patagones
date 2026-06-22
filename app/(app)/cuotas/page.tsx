@@ -38,7 +38,7 @@ export default function CuotasPage() {
       {/* Main status card */}
       {pendiente ? (
         <Card className="mb-4 overflow-hidden border-0 shadow-[0_4px_20px_0_rgb(0_61_165/0.15)]">
-          <div className="bg-gradient-to-br from-[#C8102E] via-[#a50020] to-[#8B0000] p-5">
+          <div className="bg-gradient-to-br from-[#15803D] via-[#0F6B30] to-[#052E16] p-5">
             <p className="text-white/70 text-sm mb-1">Cuota pendiente</p>
             <p className="text-white text-4xl font-black tracking-tight mb-0.5">{formatCurrency(pendiente.monto)}</p>
             {"vencimiento" in pendiente && (
@@ -48,7 +48,7 @@ export default function CuotasPage() {
             )}
           </div>
           <CardContent className="py-4">
-            <Button className="w-full h-11 bg-[#C8102E] hover:bg-[#8B0000] text-white rounded-xl font-bold shadow-sm" size="lg">
+            <Button className="w-full h-11 bg-[#15803D] hover:bg-[#052E16] text-white rounded-xl font-bold shadow-sm" size="lg">
               <CreditCard className="w-4 h-4" /> Pagar con Mercado Pago
             </Button>
           </CardContent>

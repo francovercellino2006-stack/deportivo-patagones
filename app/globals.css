@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-vc-red: #C8102E;
-  --color-vc-red-hover: #a50d25;
-  --color-vc-blue: #C8102E;
-  --color-vc-blue-hover: #8B0000;
+  --color-vc-red: #15803D;
+  --color-vc-red-hover: #166534;
+  --color-vc-blue: #15803D;
+  --color-vc-blue-hover: #052E16;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);

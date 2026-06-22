@@ -16,13 +16,13 @@ export default function PerfilPage() {
       <PageHeader title="Mi perfil" />
 
       {/* Profile hero */}
-      <Card className="mb-4 overflow-hidden border-0 shadow-[0_4px_20px_0_rgb(200_16_46/0.12)]">
-        <div className="h-24 bg-gradient-to-br from-[#C8102E] via-[#a50020] to-[#8B0000]" />
+      <Card className="mb-4 overflow-hidden border-0 shadow-[0_4px_20px_0_rgb(21_128_61/0.12)]">
+        <div className="h-24 bg-gradient-to-br from-[#15803D] via-[#0F6B30] to-[#052E16]" />
         <CardContent className="pt-0 -mt-10 pb-5">
           <div className="flex items-end justify-between mb-4">
             <Avatar className="w-20 h-20 ring-4 ring-white shadow-lg">
               <AvatarImage src="" alt={mockUser.name} />
-              <AvatarFallback className="bg-[#C8102E] text-white text-xl font-black">
+              <AvatarFallback className="bg-[#15803D] text-white text-xl font-black">
                 {getInitials(mockUser.name)}
               </AvatarFallback>
             </Avatar>
@@ -33,7 +33,7 @@ export default function PerfilPage() {
           <h2 className="text-xl font-black text-[#0D1117]">{mockUser.name}</h2>
           <p className="text-sm text-[#8892A4] mt-0.5">Socio #{mockUser.socioNumber}</p>
           <div className="flex items-center gap-2 mt-3 flex-wrap">
-            <Badge variant="red" className="font-semibold">{mockUser.category}</Badge>
+            <Badge variant="green" className="font-semibold">{mockUser.category}</Badge>
             {mockUser.sports.map(s => (
               <Badge key={s} variant="default">{s}</Badge>
             ))}
@@ -42,8 +42,8 @@ export default function PerfilPage() {
       </Card>
 
       {/* Member card */}
-      <Card className="mb-4 overflow-hidden border-0 shadow-[0_4px_20px_0_rgb(200_16_46/0.15)]">
-        <div className="bg-gradient-to-br from-[#C8102E] via-[#a50020] to-[#8B0000] p-5 relative overflow-hidden">
+      <Card className="mb-4 overflow-hidden border-0 shadow-[0_4px_20px_0_rgb(21_128_61/0.15)]">
+        <div className="bg-gradient-to-br from-[#15803D] via-[#0F6B30] to-[#052E16] p-5 relative overflow-hidden">
           {/* Background decoration */}
           <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5" />
           <div className="absolute -right-4 top-8 w-20 h-20 rounded-full bg-white/5" />
@@ -51,9 +51,9 @@ export default function PerfilPage() {
           <div className="flex items-start justify-between mb-6 relative z-10">
             <div>
               <p className="text-white/50 text-xs font-medium uppercase tracking-wider">Club Atlético</p>
-              <p className="text-white font-black text-lg leading-tight">Villa Congreso</p>
+              <p className="text-white font-black text-lg leading-tight">Deportivo Patagones</p>
             </div>
-            <Image src="/escudo.png" alt="VC" width={44} height={43} className="opacity-90 drop-shadow-md" />
+            <Image src="/escudo.png" alt="DP" width={44} height={43} className="opacity-90 drop-shadow-md" />
           </div>
 
           <div className="relative z-10">

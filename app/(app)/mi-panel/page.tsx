@@ -22,7 +22,7 @@ const tipoCfg: Record<AvisoTipo, { color: string }> = {
   suspensión:   { color: "bg-[#C8102E]/10 text-[#C8102E]" },
   recordatorio: { color: "bg-amber-50 text-amber-700" },
   resultado:    { color: "bg-emerald-50 text-emerald-700" },
-  convocatoria: { color: "bg-[#C8102E]/10 text-[#C8102E]" },
+  convocatoria: { color: "bg-[#15803D]/10 text-[#15803D]" },
 };
 
 function formatRelative(dateStr: string) {

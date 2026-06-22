@@ -150,9 +150,9 @@ export const mockHorarios = [
 ];
 
 export const mockPartidos = [
-  { id: "1", deporte: "Fútbol", categoria: "Primera División", local: "Villa Congreso", visitante: "Deportivo Norte", fecha: "2026-06-15", hora: "16:00", lugar: "Cancha Principal", resultado: null },
-  { id: "2", deporte: "Básquet", categoria: "Sub-16", local: "Villa Congreso", visitante: "Club Roca", fecha: "2026-06-14", hora: "10:00", lugar: "Gimnasio", resultado: null },
-  { id: "3", deporte: "Hockey", categoria: "Damas", local: "Villa Congreso", visitante: "Atlético Viedma", fecha: "2026-06-21", hora: "11:00", lugar: "Campo de hockey", resultado: null },
+  { id: "1", deporte: "Fútbol", categoria: "Primera División", local: "Deportivo Patagones", visitante: "Deportivo Norte", fecha: "2026-06-15", hora: "16:00", lugar: "Cancha Principal", resultado: null },
+  { id: "2", deporte: "Básquet", categoria: "Sub-16", local: "Deportivo Patagones", visitante: "Club Roca", fecha: "2026-06-14", hora: "10:00", lugar: "Gimnasio", resultado: null },
+  { id: "3", deporte: "Hockey", categoria: "Damas", local: "Deportivo Patagones", visitante: "Atlético Viedma", fecha: "2026-06-21", hora: "11:00", lugar: "Campo de hockey", resultado: null },
 ];
 
 export const mockProfesores = [
