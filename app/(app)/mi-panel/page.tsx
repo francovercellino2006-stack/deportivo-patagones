@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Send, Pin, Trash2, ChevronDown, ChevronUp, Plus, Users } from "lucide-react";
+import { ArrowLeft, Send, Pin, Trash2, ChevronDown, ChevronUp, Plus, Users, LogIn } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { mockAvisos, mockProfesores, mockComunidades, type AvisoTipo, type ComunidadId } from "@/lib/mock-data";
-
-const PROFE_SIMULADO = mockProfesores[2]; // Diego Paredes — Fútbol
+import { useAuth } from "@/components/providers/auth-provider";
 
 const deporteAComunidad: Record<string, ComunidadId> = {
   "Fútbol":   "futbol",
@@ -43,6 +42,7 @@ function formatRelative(dateStr: string) {
 }
 
 export default function MiPanelPage() {
+  const { session, ready } = useAuth();
   const [titulo, setTitulo] = useState("");
   const [contenido, setContenido] = useState("");
   const [tipo, setTipo] = useState<AvisoTipo>("general");
@@ -50,9 +50,36 @@ export default function MiPanelPage() {
   const [publicado, setPublicado] = useState(false);
   const [formOpen, setFormOpen] = useState(true);
 
-  const comunidadId = deporteAComunidad[PROFE_SIMULADO.deporte] ?? "futbol";
+  const profe      = ready && session?.role === "profe"
+    ? mockProfesores.find(p => p.id === session.profesorId) ?? mockProfesores[2]
+    : null;
+
+  const comunidadId = profe ? (deporteAComunidad[profe.deporte] ?? "futbol") : "futbol";
   const comunidad   = mockComunidades.find(c => c.id === comunidadId)!;
-  const misAvisos   = mockAvisos.filter(a => a.profesorId === PROFE_SIMULADO.id);
+  const misAvisos   = profe ? mockAvisos.filter(a => a.profesorId === profe.id) : [];
+
+  // Pantalla de acceso denegado
+  if (ready && session?.role !== "profe") {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+        <div className="w-16 h-16 rounded-2xl bg-[#15803D]/10 flex items-center justify-center mb-4">
+          <LogIn aria-hidden="true" className="w-8 h-8 text-[#15803D]" />
+        </div>
+        <h1 className="text-lg font-black text-[#0D1117] mb-1">Acceso exclusivo para profes</h1>
+        <p className="text-sm text-[#566070] mb-6 max-w-xs">
+          Para publicar avisos en una comunidad tenés que ingresar como profe del club.
+        </p>
+        <Link
+          href="/login"
+          className="h-11 px-6 bg-[#15803D] text-white rounded-2xl text-sm font-bold hover:bg-[#052E16] transition-colors flex items-center gap-2"
+        >
+          <LogIn aria-hidden="true" className="w-4 h-4" /> Ir al inicio de sesión
+        </Link>
+      </div>
+    );
+  }
+
+  if (!profe) return null; // esperando hidratación
 
   function handlePublicar() {
     if (!titulo.trim() || !contenido.trim()) return;
@@ -99,11 +126,11 @@ export default function MiPanelPage() {
       {/* Profile bar */}
       <div className="flex items-center gap-3 mb-4 p-4 bg-white border border-[#E8ECF4] rounded-2xl">
         <Avatar className={`w-11 h-11 ring-2 ring-[#E8ECF4] ${comunidad.colorBg}`}>
-          <AvatarFallback className={`text-sm font-bold ${comunidad.colorText}`}>{PROFE_SIMULADO.initials}</AvatarFallback>
+          <AvatarFallback className={`text-sm font-bold ${comunidad.colorText}`}>{profe.initials}</AvatarFallback>
         </Avatar>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-bold text-[#0D1117]">{PROFE_SIMULADO.name}</p>
-          <p className="text-xs text-[#566070]">{PROFE_SIMULADO.categorias.join(" · ")}</p>
+          <p className="text-sm font-bold text-[#0D1117]">{profe.name}</p>
+          <p className="text-xs text-[#566070]">{profe.categorias.join(" · ")}</p>
         </div>
         <span className="text-[10px] font-bold px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">
           Profe activo
@@ -215,10 +242,10 @@ export default function MiPanelPage() {
                 <p className="text-[10px] text-[#566070] mb-2 font-bold uppercase tracking-wider">Vista previa</p>
                 <div className="flex items-center gap-2 mb-2">
                   <Avatar className={`w-7 h-7 ${comunidad.colorBg}`}>
-                    <AvatarFallback className={`text-[10px] font-bold ${comunidad.colorText}`}>{PROFE_SIMULADO.initials}</AvatarFallback>
+                    <AvatarFallback className={`text-[10px] font-bold ${comunidad.colorText}`}>{profe.initials}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <span className="text-xs font-bold text-[#0D1117]">{PROFE_SIMULADO.name}</span>
+                    <span className="text-xs font-bold text-[#0D1117]">{profe.name}</span>
                     <span className={`text-[10px] font-semibold ml-1.5 ${comunidad.colorText}`}>{comunidad.nombre}</span>
                   </div>
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${tipoCfg[tipo].bg} ${tipoCfg[tipo].text}`}>

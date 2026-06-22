@@ -1,19 +1,30 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Megaphone, Calendar, Trophy, CreditCard } from "lucide-react";
+import { Home, Megaphone, Calendar, Trophy, CreditCard, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/components/providers/auth-provider";
 
-const navItems = [
-  { href: "/avisos",     label: "Avisos",   icon: Megaphone },
-  { href: "/calendario", label: "Agenda",   icon: Calendar  },
-  { href: "/inicio",     label: "Inicio",   icon: Home      },
-  { href: "/eventos",    label: "Eventos",  icon: Trophy    },
-  { href: "/cuotas",     label: "Cuotas",   icon: CreditCard},
+const socioItems = [
+  { href: "/avisos",     label: "Avisos",    icon: Megaphone      },
+  { href: "/calendario", label: "Agenda",    icon: Calendar       },
+  { href: "/inicio",     label: "Inicio",    icon: Home           },
+  { href: "/eventos",    label: "Eventos",   icon: Trophy         },
+  { href: "/cuotas",     label: "Cuotas",    icon: CreditCard     },
+];
+
+const profeItems = [
+  { href: "/avisos",     label: "Avisos",    icon: Megaphone      },
+  { href: "/calendario", label: "Agenda",    icon: Calendar       },
+  { href: "/inicio",     label: "Inicio",    icon: Home           },
+  { href: "/eventos",    label: "Eventos",   icon: Trophy         },
+  { href: "/mi-panel",   label: "Mi panel",  icon: LayoutDashboard},
 ];
 
 export function BottomNav() {
-  const pathname = usePathname();
+  const pathname  = usePathname();
+  const { session } = useAuth();
+  const navItems  = session?.role === "profe" ? profeItems : socioItems;
 
   return (
     <nav aria-label="Navegación principal" className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-[#E8ECF4] pb-safe">

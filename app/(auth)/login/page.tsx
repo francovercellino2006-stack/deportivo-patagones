@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { LoginForm } from "./LoginForm";
+import { DemoAccess } from "./DemoAccess";
 
 export const metadata: Metadata = { title: "Iniciar sesión" };
 
@@ -44,13 +45,7 @@ export default function LoginPage() {
           <LoginForm />
         </div>
 
-        <Link
-          href="/inicio"
-          className="w-full h-11 border border-[#E8ECF4] bg-white text-[#4A5568] rounded-2xl text-sm font-semibold hover:bg-[#F0F3FA] transition-colors flex items-center justify-center"
-          aria-label="Ingresar al modo de demostración"
-        >
-          Entrar como demo
-        </Link>
+        <DemoAccess />
 
         <p className="text-center text-[10px] text-[#566070] mt-6">
           Club Atlético Deportivo Patagones · Fundado el{" "}
