@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Megaphone, Calendar, Trophy, CreditCard, LayoutDashboard } from "lucide-react";
+import { Home, Megaphone, Calendar, Trophy, LayoutDashboard, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/components/providers/auth-provider";
 
@@ -10,7 +10,7 @@ const socioItems = [
   { href: "/calendario", label: "Agenda",    icon: Calendar       },
   { href: "/inicio",     label: "Inicio",    icon: Home           },
   { href: "/eventos",    label: "Eventos",   icon: Trophy         },
-  { href: "/cuotas",     label: "Cuotas",    icon: CreditCard     },
+  { href: "/perfil",     label: "Mi panel",  icon: User           },
 ];
 
 const profeItems = [
