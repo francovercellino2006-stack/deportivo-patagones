@@ -7,7 +7,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: { default: "Deportivo Patagones", template: "%s · Deportivo Patagones" },
-  description: "La plataforma del Club Atlético Deportivo Patagones de Viedma",
+  description: "La plataforma del Club Atlético Deportivo Patagones de Carmen de Patagones",
   manifest: "/manifest.json",
   appleWebApp: { capable: true, statusBarStyle: "default", title: "Deportivo Patagones" },
 };
@@ -19,14 +19,15 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <a href="#main-content" className="skip-link">Ir al contenido principal</a>
+        {children}
+      </body>
     </html>
   );
 }

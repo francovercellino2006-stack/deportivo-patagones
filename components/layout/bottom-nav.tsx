@@ -16,7 +16,7 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-[#E8ECF4] pb-safe">
+    <nav aria-label="Navegación principal" className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-[#E8ECF4] pb-safe">
       <div className="flex h-16 items-center justify-around max-w-lg mx-auto px-1">
         {navItems.map(({ href, label, icon: Icon }) => {
           const active = pathname === href || pathname.startsWith(href + "/");
@@ -24,6 +24,7 @@ export function BottomNav() {
             <Link
               key={href}
               href={href}
+              aria-current={active ? "page" : undefined}
               className="flex flex-col items-center gap-0.5 min-w-0 flex-1 py-1"
             >
               <div className={cn(
@@ -31,16 +32,17 @@ export function BottomNav() {
                 active ? "bg-[#15803D]/10" : ""
               )}>
                 <Icon
+                  aria-hidden="true"
                   className={cn(
                     "w-5 h-5 transition-all duration-200",
-                    active ? "text-[#15803D]" : "text-[#9399ab]"
+                    active ? "text-[#15803D]" : "text-[#566070]"
                   )}
                   strokeWidth={active ? 2.5 : 1.8}
                 />
               </div>
               <span className={cn(
                 "text-[10px] truncate transition-all duration-200",
-                active ? "text-[#15803D] font-semibold" : "text-[#9399ab] font-medium"
+                active ? "text-[#15803D] font-semibold" : "text-[#566070] font-medium"
               )}>
                 {label}
               </span>

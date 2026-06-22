@@ -31,14 +31,16 @@ export default function NoticiasPage() {
       <PageHeader title="Noticias" subtitle="Lo que está pasando en el club" />
 
       {/* Category filter */}
-      <div className="flex gap-2 overflow-x-auto pb-3 mb-5 -mx-4 px-4 scrollbar-none">
+      <div role="group" aria-label="Filtrar por categoría" className="flex gap-2 overflow-x-auto pb-3 mb-5 -mx-4 px-4 scrollbar-none">
         {categories.map((cat, i) => (
           <button
             key={cat}
+            type="button"
+            aria-pressed={i === 0}
             className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
               i === 0
                 ? "bg-[#15803D] text-white shadow-sm"
-                : "bg-white border border-[#E8ECF4] text-[#8892A4] hover:text-[#0D1117]"
+                : "bg-white border border-[#E8ECF4] text-[#566070] hover:text-[#0D1117]"
             }`}
           >
             {cat}
@@ -56,7 +58,7 @@ export default function NoticiasPage() {
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-white/25 text-white border-0 text-[10px]">{noticia.category}</Badge>
                   <span className="flex items-center gap-1 text-[10px] text-white/70 font-medium">
-                    <Pin className="w-3 h-3" /> Destacado
+                    <Pin aria-hidden="true" className="w-3 h-3" /> Destacado
                   </span>
                 </div>
                 <h3 className="text-white font-bold text-base leading-snug line-clamp-2">{noticia.title}</h3>
@@ -65,8 +67,10 @@ export default function NoticiasPage() {
             <CardContent className="py-3.5">
               <p className="text-sm text-[#4A5568] line-clamp-2 leading-relaxed">{noticia.excerpt}</p>
               <div className="flex items-center justify-between mt-2.5">
-                <span className="text-[11px] text-[#8892A4]">{formatDate(noticia.date, { day: "numeric", month: "long", year: "numeric" })}</span>
-                <span className="text-xs text-[#15803D] font-semibold">Leer más →</span>
+                <time dateTime={noticia.date} className="text-[11px] text-[#566070]">
+                  {formatDate(noticia.date, { day: "numeric", month: "long", year: "numeric" })}
+                </time>
+                <span className="text-xs text-[#15803D] font-semibold" aria-hidden="true">Leer más →</span>
               </div>
             </CardContent>
           </Card>
@@ -86,12 +90,12 @@ export default function NoticiasPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <Badge variant={categoryBadgeVariant(noticia.category)} className="text-[10px] px-1.5 py-0">{noticia.category}</Badge>
-                      <span className="text-[10px] text-[#8892A4]">{formatDate(noticia.date, { day: "numeric", month: "short" })}</span>
+                      <time dateTime={noticia.date} className="text-[10px] text-[#566070]">{formatDate(noticia.date, { day: "numeric", month: "short" })}</time>
                     </div>
                     <p className="text-sm font-bold text-[#0D1117] leading-snug line-clamp-2">{noticia.title}</p>
-                    <p className="text-xs text-[#8892A4] mt-0.5 line-clamp-1">{noticia.excerpt}</p>
+                    <p className="text-xs text-[#566070] mt-0.5 line-clamp-1">{noticia.excerpt}</p>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-[#C4CBD8] shrink-0 mt-1" />
+                  <ChevronRight className="w-4 h-4 text-[#6B7A8D] shrink-0 mt-1" />
                 </div>
               </CardContent>
             </Card>

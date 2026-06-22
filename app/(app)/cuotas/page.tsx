@@ -43,13 +43,16 @@ export default function CuotasPage() {
             <p className="text-white text-4xl font-black tracking-tight mb-0.5">{formatCurrency(pendiente.monto)}</p>
             {"vencimiento" in pendiente && (
               <p className="text-white/60 text-sm">
-                {pendiente.mes} · Vence {formatDate(pendiente.vencimiento, { day: "numeric", month: "long" })}
+                {pendiente.mes} · Vence{" "}
+                <time dateTime={pendiente.vencimiento}>
+                  {formatDate(pendiente.vencimiento, { day: "numeric", month: "long" })}
+                </time>
               </p>
             )}
           </div>
           <CardContent className="py-4">
             <Button className="w-full h-11 bg-[#15803D] hover:bg-[#052E16] text-white rounded-xl font-bold shadow-sm" size="lg">
-              <CreditCard className="w-4 h-4" /> Pagar con Mercado Pago
+              <CreditCard aria-hidden="true" className="w-4 h-4" /> Pagar con Mercado Pago
             </Button>
           </CardContent>
         </Card>
@@ -77,10 +80,10 @@ export default function CuotasPage() {
               <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center">
                 <TrendingUp className="w-4 h-4 text-emerald-600" />
               </div>
-              <p className="text-xs font-medium text-[#8892A4]">Total pagado</p>
+              <p className="text-xs font-medium text-[#566070]">Total pagado</p>
             </div>
             <p className="font-black text-xl text-[#0D1117]">{formatCurrency(totalPagado)}</p>
-            <p className="text-xs text-[#8892A4] mt-0.5">{pagadas.length} cuotas</p>
+            <p className="text-xs text-[#566070] mt-0.5">{pagadas.length} cuotas</p>
           </CardContent>
         </Card>
         <Card>
@@ -89,10 +92,10 @@ export default function CuotasPage() {
               <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
                 <Clock className="w-4 h-4 text-amber-600" />
               </div>
-              <p className="text-xs font-medium text-[#8892A4]">Próx. vencimiento</p>
+              <p className="text-xs font-medium text-[#566070]">Próx. vencimiento</p>
             </div>
             <p className="font-black text-xl text-[#0D1117]">{pendiente ? formatCurrency(pendiente.monto) : "—"}</p>
-            <p className="text-xs text-[#8892A4] mt-0.5">{pendiente ? "Pendiente" : "Sin deudas"}</p>
+            <p className="text-xs text-[#566070] mt-0.5">{pendiente ? "Pendiente" : "Sin deudas"}</p>
           </CardContent>
         </Card>
       </div>
@@ -119,8 +122,12 @@ export default function CuotasPage() {
                 <div className="flex items-center gap-3 shrink-0">
                   <p className="text-sm font-bold text-[#0D1117]">{formatCurrency(cuota.monto)}</p>
                   {cuota.estado === "pagado" && "comprobante" in cuota && (
-                    <button className="w-8 h-8 flex items-center justify-center rounded-xl bg-[#F0F3FA] hover:bg-[#E8ECF4] transition-colors">
-                      <Download className="w-3.5 h-3.5 text-[#8892A4]" />
+                    <button
+                      type="button"
+                      aria-label={`Descargar comprobante de ${cuota.mes}`}
+                      className="w-8 h-8 flex items-center justify-center rounded-xl bg-[#F0F3FA] hover:bg-[#E8ECF4] transition-colors"
+                    >
+                      <Download aria-hidden="true" className="w-3.5 h-3.5 text-[#566070]" />
                     </button>
                   )}
                 </div>

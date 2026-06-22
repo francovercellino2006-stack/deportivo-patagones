@@ -27,7 +27,7 @@ const quickLinks = [
 ];
 
 const tipoCfg: Record<AvisoTipo, { label: string; dot: string }> = {
-  general:      { label: "General",      dot: "bg-[#8892A4]"  },
+  general:      { label: "General",      dot: "bg-[#566070]"  },
   suspensión:   { label: "Suspendido",   dot: "bg-[#C8102E]"  },
   recordatorio: { label: "Recordatorio", dot: "bg-amber-500"  },
   resultado:    { label: "Resultado",    dot: "bg-emerald-500" },
@@ -53,9 +53,10 @@ export default function InicioPage() {
 
       {/* Greeting */}
       <div className="pt-1">
-        <p className="text-sm text-[#8892A4] font-medium">Hola de nuevo,</p>
+        <p className="text-sm text-[#566070] font-medium">Hola de nuevo,</p>
         <h1 className="text-2xl font-black tracking-tight text-[#0D1117]">
-          {mockUser.name.split(" ")[0]} 👋
+          {mockUser.name.split(" ")[0]}{" "}
+          <span role="img" aria-label="Saludos">👋</span>
         </h1>
       </div>
 
@@ -84,10 +85,13 @@ export default function InicioPage() {
                 <span className="text-xl font-black text-white tracking-tight">VS</span>
               </div>
               <div className="flex items-center gap-1.5 text-white/60">
-                <Calendar className="w-3 h-3" />
-                <span className="text-[10px] font-medium">
+                <Calendar className="w-3 h-3" aria-hidden="true" />
+                <time
+                  dateTime={`${proximoPartido.fecha}T${proximoPartido.hora}`}
+                  className="text-[10px] font-medium"
+                >
                   {formatShortDate(proximoPartido.fecha)} · {proximoPartido.hora}
-                </span>
+                </time>
               </div>
             </div>
 
@@ -133,19 +137,19 @@ export default function InicioPage() {
           {pendiente && (
             <span className="text-sm font-bold text-amber-700 shrink-0">{formatCurrency(pendiente.monto)}</span>
           )}
-          <ChevronRight className="w-4 h-4 text-[#8892A4] shrink-0" />
+          <ChevronRight className="w-4 h-4 text-[#566070] shrink-0" />
         </div>
       </Link>
 
       {/* Quick actions */}
       <div>
-        <h2 className="text-xs font-semibold text-[#8892A4] uppercase tracking-wider mb-3">Accesos rápidos</h2>
+        <h2 className="text-xs font-semibold text-[#566070] uppercase tracking-wider mb-3">Accesos rápidos</h2>
         <div className="grid grid-cols-3 gap-3">
           {quickLinks.map(({ href, label, icon: Icon, bg, color }) => (
             <Link key={href} href={href}>
               <div className="bg-white rounded-2xl border border-[#E8ECF4] shadow-[0_2px_8px_0_rgb(0_0_0/0.04)] p-3.5 flex flex-col items-center gap-2.5 hover:shadow-[0_4px_16px_0_rgb(21_128_61/0.12)] transition-shadow active:scale-95">
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${bg}`}>
-                  <Icon className={`w-5 h-5 ${color}`} strokeWidth={1.8} />
+                  <Icon aria-hidden="true" className={`w-5 h-5 ${color}`} strokeWidth={1.8} />
                 </div>
                 <span className="text-xs font-semibold text-[#4A5568] text-center leading-tight">{label}</span>
               </div>
@@ -157,7 +161,7 @@ export default function InicioPage() {
       {/* Featured news */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs font-semibold text-[#8892A4] uppercase tracking-wider">Destacado</h2>
+          <h2 className="text-xs font-semibold text-[#566070] uppercase tracking-wider">Destacado</h2>
           <Link href="/noticias" className="text-xs text-[#15803D] font-semibold">Ver todo →</Link>
         </div>
         <Link href={`/noticias/${noticiaDestacada.id}`}>
@@ -167,8 +171,10 @@ export default function InicioPage() {
             </div>
             <CardContent className="py-3.5">
               <p className="font-bold text-sm leading-snug text-[#0D1117] line-clamp-2">{noticiaDestacada.title}</p>
-              <p className="text-xs text-[#8892A4] mt-1 line-clamp-2">{noticiaDestacada.excerpt}</p>
-              <p className="text-[10px] text-[#8892A4] mt-2">{formatShortDate(noticiaDestacada.date)}</p>
+              <p className="text-xs text-[#566070] mt-1 line-clamp-2">{noticiaDestacada.excerpt}</p>
+              <time dateTime={noticiaDestacada.date} className="block text-[10px] text-[#566070] mt-2">
+                {formatShortDate(noticiaDestacada.date)}
+              </time>
             </CardContent>
           </Card>
         </Link>
@@ -177,22 +183,22 @@ export default function InicioPage() {
       {/* More news */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs font-semibold text-[#8892A4] uppercase tracking-wider">Más noticias</h2>
+          <h2 className="text-xs font-semibold text-[#566070] uppercase tracking-wider">Más noticias</h2>
         </div>
         <div className="space-y-2">
           {mockNoticias.filter(n => !n.pinned).slice(0, 3).map(noticia => (
             <Link key={noticia.id} href={`/noticias/${noticia.id}`}>
               <Card className="hover:shadow-[0_4px_12px_0_rgb(0_0_0/0.07)] transition-shadow">
                 <CardContent className="py-3.5 flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${categoryGradient[noticia.category] ?? "from-[#15803D] to-[#22C55E]"} shrink-0`} />
+                  <div aria-hidden="true" className={`w-10 h-10 rounded-xl bg-gradient-to-br ${categoryGradient[noticia.category] ?? "from-[#15803D] to-[#22C55E]"} shrink-0`} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 mb-0.5">
                       <Badge variant={categoryBadgeVariant(noticia.category)} className="text-[10px] px-1.5 py-0">{noticia.category}</Badge>
-                      <span className="text-[10px] text-[#8892A4]">{formatShortDate(noticia.date)}</span>
+                      <time dateTime={noticia.date} className="text-[10px] text-[#566070]">{formatShortDate(noticia.date)}</time>
                     </div>
                     <p className="text-sm font-semibold text-[#0D1117] leading-snug line-clamp-1">{noticia.title}</p>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-[#C4CBD8] shrink-0" />
+                  <ChevronRight aria-hidden="true" className="w-4 h-4 text-[#6B7A8D] shrink-0" />
                 </CardContent>
               </Card>
             </Link>
@@ -203,7 +209,7 @@ export default function InicioPage() {
       {/* Coach updates */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs font-semibold text-[#8892A4] uppercase tracking-wider">Profes avisaron</h2>
+          <h2 className="text-xs font-semibold text-[#566070] uppercase tracking-wider">Profes avisaron</h2>
           <Link href="/avisos" className="text-xs text-[#15803D] font-semibold">Ver todo →</Link>
         </div>
         <div className="space-y-2">
@@ -222,15 +228,15 @@ export default function InicioPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <span className="text-xs font-bold text-[#0D1117]">{aviso.profesorName}</span>
-                        <span className="text-[10px] text-[#8892A4]">· {aviso.deporte}</span>
+                        <span className="text-[10px] text-[#566070]">· {aviso.deporte}</span>
                       </div>
                       <p className="text-sm font-semibold text-[#0D1117] line-clamp-1">{aviso.titulo}</p>
                       <div className="flex items-center gap-1.5 mt-1">
                         <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot} shrink-0`} />
-                        <span className="text-[10px] text-[#8892A4]">{cfg.label}</span>
+                        <span className="text-[10px] text-[#566070]">{cfg.label}</span>
                       </div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-[#C4CBD8] shrink-0 mt-0.5" />
+                    <ChevronRight className="w-4 h-4 text-[#6B7A8D] shrink-0 mt-0.5" />
                   </CardContent>
                 </Card>
               </Link>

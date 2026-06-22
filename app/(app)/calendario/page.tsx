@@ -46,7 +46,7 @@ export default function CalendarioPage() {
                     {d.getDate()}
                   </span>
                   <span className={`text-[9px] font-bold uppercase leading-none mt-0.5 ${
-                    isToday ? "text-white/70" : "text-[#8892A4]"
+                    isToday ? "text-white/70" : "text-[#566070]"
                   }`}>
                     {d.toLocaleDateString("es-AR", { month: "short" })}
                   </span>
@@ -55,7 +55,7 @@ export default function CalendarioPage() {
                   <p className={`text-sm font-bold ${isToday ? "text-[#15803D]" : "text-[#0D1117]"}`}>
                     {isToday ? "Hoy" : d.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })}
                   </p>
-                  <p className="text-[10px] text-[#8892A4]">{dayItems.length} actividades</p>
+                  <p className="text-[10px] text-[#566070]">{dayItems.length} actividades</p>
                 </div>
               </div>
 
@@ -76,7 +76,7 @@ export default function CalendarioPage() {
                                 </Badge>
                               </div>
                               <p className="text-sm font-bold text-[#0D1117]">{item.title}</p>
-                              <div className="flex items-center gap-4 mt-1.5 text-xs text-[#8892A4]">
+                              <div className="flex items-center gap-4 mt-1.5 text-xs text-[#566070]">
                                 <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{item.time}</span>
                                 <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{item.location}</span>
                               </div>
@@ -85,10 +85,10 @@ export default function CalendarioPage() {
                             <>
                               <div className="flex items-center gap-1.5 mb-1">
                                 <Badge variant="red" className="text-[10px] px-1.5 py-0">Partido</Badge>
-                                <span className="text-[10px] text-[#8892A4]">{item.deporte} · {item.categoria}</span>
+                                <span className="text-[10px] text-[#566070]">{item.deporte} · {item.categoria}</span>
                               </div>
                               <p className="text-sm font-bold text-[#0D1117]">{item.local} vs {item.visitante}</p>
-                              <div className="flex items-center gap-4 mt-1.5 text-xs text-[#8892A4]">
+                              <div className="flex items-center gap-4 mt-1.5 text-xs text-[#566070]">
                                 <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{item.hora}</span>
                                 <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{item.lugar}</span>
                               </div>

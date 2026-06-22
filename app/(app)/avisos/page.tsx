@@ -10,7 +10,7 @@ import { mockAvisos, mockProfesores, type AvisoTipo } from "@/lib/mock-data";
 const deportes = ["Todos", "Fútbol", "Básquet", "Hockey", "Patín", "Gimnasia"];
 
 const tipoCfg: Record<AvisoTipo, { label: string; bg: string; text: string; dot: string }> = {
-  general:      { label: "General",      bg: "bg-[#F4F6FA]",          text: "text-[#6b7280]",   dot: "bg-[#9399ab]"   },
+  general:      { label: "General",      bg: "bg-[#F4F6FA]",          text: "text-[#6b7280]",   dot: "bg-[#566070]"   },
   suspensión:   { label: "Suspendido",   bg: "bg-[#C8102E]/8",        text: "text-[#C8102E]",   dot: "bg-[#C8102E]"   },
   recordatorio: { label: "Recordatorio", bg: "bg-amber-50",            text: "text-amber-700",   dot: "bg-amber-500"   },
   resultado:    { label: "Resultado",    bg: "bg-emerald-50",          text: "text-emerald-700", dot: "bg-emerald-500" },
@@ -65,11 +65,11 @@ function AvisoCard({ aviso }: { aviso: typeof mockAvisos[0] }) {
               {aviso.fijado && <Pin className="w-3 h-3 text-[#15803D]" />}
             </div>
             <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-              <span className="text-[10px] font-semibold text-[#8892A4]">{aviso.deporte}</span>
-              <span className="text-[10px] text-[#C4CBD8]">·</span>
-              <span className="text-[10px] text-[#8892A4]">{aviso.categoria}</span>
-              <span className="text-[10px] text-[#C4CBD8]">·</span>
-              <span className="text-[10px] text-[#8892A4]">{formatRelative(aviso.fecha)}</span>
+              <span className="text-[10px] font-semibold text-[#566070]">{aviso.deporte}</span>
+              <span className="text-[10px] text-[#6B7A8D]">·</span>
+              <span className="text-[10px] text-[#566070]">{aviso.categoria}</span>
+              <span className="text-[10px] text-[#6B7A8D]">·</span>
+              <span className="text-[10px] text-[#566070]">{formatRelative(aviso.fecha)}</span>
             </div>
           </div>
 
@@ -135,7 +135,7 @@ export default function AvisosPage() {
             className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
               filtro === d
                 ? "bg-[#15803D] text-white shadow-sm"
-                : "bg-white border border-[#E8ECF4] text-[#8892A4] hover:text-[#0D1117]"
+                : "bg-white border border-[#E8ECF4] text-[#566070] hover:text-[#0D1117]"
             }`}
           >
             {d}
@@ -147,10 +147,10 @@ export default function AvisosPage() {
       {filtrados.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <div className="w-16 h-16 rounded-2xl bg-[#F0F3FA] flex items-center justify-center mb-4">
-            <Megaphone className="w-7 h-7 text-[#8892A4]" />
+            <Megaphone className="w-7 h-7 text-[#566070]" />
           </div>
           <p className="text-sm font-bold text-[#0D1117]">Sin avisos por acá</p>
-          <p className="text-xs text-[#8892A4] mt-1 max-w-[200px]">
+          <p className="text-xs text-[#566070] mt-1 max-w-[200px]">
             Cuando los profes publiquen algo, va a aparecer acá.
           </p>
         </div>

@@ -39,7 +39,7 @@
   --surface: #FFFFFF;
   --surface-2: #F0F3FA;
   --border: #E8ECF4;
-  --muted: #8892A4;
+  --muted: #566070; /* darkened from #8892A4 — WCAG AA 5.5:1 on white */
   --fg: #0D1117;
   --fg-secondary: #4A5568;
 }
@@ -76,6 +76,23 @@ body {
 
 .pb-safe { padding-bottom: max(env(safe-area-inset-bottom), 16px); }
 .pt-safe { padding-top: env(safe-area-inset-top); }
+
+/* Skip link — ISO 9241-171 / WCAG 2.4.1 */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--fg);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.skip-link:focus { top: 0; }
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(10px); }

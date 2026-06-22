@@ -31,7 +31,7 @@ export default function PerfilPage() {
             </button>
           </div>
           <h2 className="text-xl font-black text-[#0D1117]">{mockUser.name}</h2>
-          <p className="text-sm text-[#8892A4] mt-0.5">Socio #{mockUser.socioNumber}</p>
+          <p className="text-sm text-[#566070] mt-0.5">Socio #{mockUser.socioNumber}</p>
           <div className="flex items-center gap-2 mt-3 flex-wrap">
             <Badge variant="green" className="font-semibold">{mockUser.category}</Badge>
             {mockUser.sports.map(s => (
@@ -92,9 +92,9 @@ export default function PerfilPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-[#0D1117]">{label}</p>
-                <p className="text-xs text-[#8892A4]">{sub}</p>
+                <p className="text-xs text-[#566070]">{sub}</p>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#C4CBD8] shrink-0" />
+              <ChevronRight className="w-4 h-4 text-[#6B7A8D] shrink-0" />
             </a>
           ))}
         </CardContent>

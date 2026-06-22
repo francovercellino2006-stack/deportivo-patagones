@@ -37,7 +37,7 @@ export default function HorariosPage() {
               className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 i === 0
                   ? "bg-[#15803D] text-white shadow-sm"
-                  : "bg-white border border-[#E8ECF4] text-[#8892A4] hover:text-[#0D1117]"
+                  : "bg-white border border-[#E8ECF4] text-[#566070] hover:text-[#0D1117]"
               }`}
             >
               {d}
@@ -59,7 +59,7 @@ export default function HorariosPage() {
                   </span>
                 </div>
                 <h2 className="font-bold text-[#0D1117]">{deporte}</h2>
-                <span className="text-xs text-[#8892A4]">{horarios.length} actividades</span>
+                <span className="text-xs text-[#566070]">{horarios.length} actividades</span>
               </div>
 
               <div className="space-y-2">
@@ -76,16 +76,16 @@ export default function HorariosPage() {
                           </div>
                           <div className="space-y-1.5">
                             <div className="flex items-center gap-2 text-xs text-[#4A5568]">
-                              <Clock className="w-3.5 h-3.5 text-[#8892A4] shrink-0" />
+                              <Clock className="w-3.5 h-3.5 text-[#566070] shrink-0" />
                               <span className="font-semibold text-[#0D1117]">{h.dias.join(" · ")}</span>
-                              <span className="text-[#8892A4]">·</span>
+                              <span className="text-[#566070]">·</span>
                               <span>{h.horario}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-[#8892A4]">
+                            <div className="flex items-center gap-2 text-xs text-[#566070]">
                               <User className="w-3.5 h-3.5 shrink-0" />
                               <span>{h.profesor}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-[#8892A4]">
+                            <div className="flex items-center gap-2 text-xs text-[#566070]">
                               <MapPin className="w-3.5 h-3.5 shrink-0" />
                               <span>{h.lugar}</span>
                             </div>

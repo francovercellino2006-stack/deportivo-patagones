@@ -59,11 +59,11 @@ export default function EventosPage() {
                       <h3 className="font-bold text-sm text-[#0D1117] leading-snug mb-2">{evento.title}</h3>
 
                       <div className="space-y-1">
-                        <div className="flex items-center gap-1.5 text-xs text-[#8892A4]">
+                        <div className="flex items-center gap-1.5 text-xs text-[#566070]">
                           <Clock className="w-3.5 h-3.5 shrink-0" />
                           <span>{evento.time} hs</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-xs text-[#8892A4]">
+                        <div className="flex items-center gap-1.5 text-xs text-[#566070]">
                           <MapPin className="w-3.5 h-3.5 shrink-0" />
                           <span>{evento.location}</span>
                         </div>
@@ -71,7 +71,7 @@ export default function EventosPage() {
 
                       {evento.cupos && (
                         <div className="mt-3">
-                          <div className="flex justify-between text-[10px] text-[#8892A4] mb-1.5">
+                          <div className="flex justify-between text-[10px] text-[#566070] mb-1.5">
                             <span className="flex items-center gap-1">
                               <Users className="w-3 h-3" />
                               {evento.inscriptos}/{evento.cupos} inscriptos
@@ -91,7 +91,7 @@ export default function EventosPage() {
                     </div>
 
                     <div className="flex items-center pr-3">
-                      <ChevronRight className="w-4 h-4 text-[#C4CBD8]" />
+                      <ChevronRight className="w-4 h-4 text-[#6B7A8D]" />
                     </div>
                   </div>
                 </CardContent>
