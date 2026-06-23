@@ -29,26 +29,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, supabaseSession) => {
         if (supabaseSession?.user) {
-          // Real Supabase session — load profile from DB
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("role, name, profe_mock_id, profe_categorias")
-            .eq("id", supabaseSession.user.id)
-            .single();
+          const meta = supabaseSession.user.user_metadata ?? {};
+          const role = (meta.role as UserRole) ?? "socio";
 
-          if (profile) {
-            setSession({
-              role: profile.role as UserRole,
-              ...(profile.role === "profe" && {
-                profesorId:       profile.profe_mock_id ?? undefined,
-                categoriasActivas: profile.profe_categorias ?? undefined,
-              }),
-            });
-          } else {
-            setSession({ role: "socio" });
-          }
+          setSession({
+            role,
+            ...(role === "profe" && {
+              profesorId:       meta.profe_mock_id ?? undefined,
+              categoriasActivas: meta.profe_categorias ?? undefined,
+            }),
+          });
         } else {
-          // No Supabase session — fall back to localStorage (demo mode)
           setSession(getSession());
         }
         setReady(true);

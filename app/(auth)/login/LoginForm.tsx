@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
+import { loginAction } from "./actions";
 
 type FormErrors = { email?: string; password?: string };
 
@@ -27,7 +27,7 @@ export function LoginForm() {
   const [password, setPassword]     = useState("");
   const [errors, setErrors]         = useState<FormErrors>({});
   const [touched, setTouched]       = useState<Record<string, boolean>>({});
-  const [loading, setLoading]       = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
 
   function handleBlur(field: keyof FormErrors) {
@@ -43,25 +43,20 @@ export function LoginForm() {
     return !next.email && !next.password;
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setTouched({ email: true, password: true });
     if (!validate()) return;
 
-    setLoading(true);
     setServerError(null);
-
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    setLoading(false);
-
-    if (error) {
-      setServerError("Email o contraseña incorrectos");
-      return;
-    }
-
-    router.push("/inicio");
+    startTransition(async () => {
+      const result = await loginAction(email, password);
+      if (result.error) {
+        setServerError(result.error);
+        return;
+      }
+      router.push("/inicio");
+    });
   }
 
   const emailError    = touched.email    ? errors.email    : undefined;
@@ -73,7 +68,11 @@ export function LoginForm() {
       <button
         type="button"
         onClick={async () => {
-          const supabase = createClient();
+          const { createBrowserClient } = await import("@supabase/ssr");
+          const supabase = createBrowserClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+          );
           await supabase.auth.signInWithOAuth({
             provider: "google",
             options: { redirectTo: `${window.location.origin}/inicio` },
@@ -176,10 +175,10 @@ export function LoginForm() {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={isPending}
           className="w-full h-11 bg-[#15803D] text-white rounded-xl text-sm font-bold hover:bg-[#052E16] transition-colors flex items-center justify-center gap-2 mt-1 shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {loading ? (
+          {isPending ? (
             <><Loader2 aria-hidden="true" className="w-4 h-4 animate-spin" /> Ingresando...</>
           ) : (
             <>Ingresar <ArrowRight aria-hidden="true" className="w-4 h-4" /></>
