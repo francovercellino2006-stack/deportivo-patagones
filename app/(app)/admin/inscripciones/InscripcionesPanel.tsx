@@ -1,11 +1,16 @@
 "use client";
 import { useState, useTransition } from "react";
-import { Search, Check, X, Loader2, ChevronDown, ChevronUp, Users } from "lucide-react";
+import { Search, Check, X, Loader2, ChevronDown, ChevronUp, Users, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
 import { actualizarDeportes } from "./actions";
-import type { Profile } from "@/lib/supabase/types";
+import type { Profile, CuotaEstado } from "@/lib/supabase/types";
+
+export type SocioConCuota = Profile & {
+  cuotaEstado: CuotaEstado | "sin-cuota";
+  cuotaMonto?: number;
+};
 
 const DEPORTES_DISPONIBLES = [
   { nombre: "Fútbol",   emoji: "⚽", color: "#15803D" },
@@ -125,7 +130,31 @@ function SocioEditor({
   );
 }
 
-function SocioRow({ socio }: { socio: Profile }) {
+function CuotaBadge({ estado, monto }: { estado: CuotaEstado | "sin-cuota"; monto?: number }) {
+  if (estado === "pagado") return (
+    <span className="flex items-center gap-1 text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
+      <CheckCircle2 className="w-3 h-3" /> Al día
+    </span>
+  );
+  if (estado === "vencida") return (
+    <span className="flex items-center gap-1 text-[10px] font-semibold text-[#C8102E] bg-[#C8102E]/8 px-1.5 py-0.5 rounded-full">
+      <AlertCircle className="w-3 h-3" /> Vencida
+    </span>
+  );
+  if (estado === "pendiente") return (
+    <span className="flex items-center gap-1 text-[10px] font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">
+      <Clock className="w-3 h-3" /> Debe
+      {monto ? ` $${(monto / 1000).toFixed(1)}k` : ""}
+    </span>
+  );
+  return (
+    <span className="text-[10px] font-semibold text-[#566070] bg-[#F0F3FA] px-1.5 py-0.5 rounded-full">
+      Sin cuota
+    </span>
+  );
+}
+
+function SocioRow({ socio }: { socio: SocioConCuota }) {
   const [editing, setEditing] = useState(false);
   const sports = socio.sports ?? [];
 
@@ -144,11 +173,12 @@ function SocioRow({ socio }: { socio: Profile }) {
           </Avatar>
 
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 flex-wrap">
               <p className="text-sm font-bold text-[#0D1117]">{socio.name}</p>
               {socio.socio_number && (
                 <span className="text-[10px] text-[#566070]">#{socio.socio_number}</span>
               )}
+              <CuotaBadge estado={socio.cuotaEstado} monto={socio.cuotaMonto} />
             </div>
             {sports.length > 0 ? (
               <div className="flex flex-wrap gap-1 mt-1">
@@ -180,7 +210,7 @@ function SocioRow({ socio }: { socio: Profile }) {
 
 type Filtro = "todos" | string;
 
-export function InscripcionesPanel({ socios }: { socios: Profile[] }) {
+export function InscripcionesPanel({ socios }: { socios: SocioConCuota[] }) {
   const [busqueda, setBusqueda] = useState("");
   const [filtroDeporte, setFiltroDeporte] = useState<Filtro>("todos");
 
