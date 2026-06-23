@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Pin, ChevronDown, ChevronUp, Megaphone, Users, ChevronRight, Bell, BellOff } from "lucide-react";
+import { ArrowLeft, Pin, ChevronDown, ChevronUp, Megaphone, Users, ChevronRight, Bell } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -286,8 +286,7 @@ export default function AvisosPage() {
     );
   }
 
-  const misComunidades   = mockComunidades.filter(c => mockUser.comunidades.includes(c.id));
-  const otrasComunidades = mockComunidades.filter(c => !mockUser.comunidades.includes(c.id));
+  const misComunidades = mockComunidades.filter(c => mockUser.comunidades.includes(c.id));
 
   const misAvisosCount = mockAvisos.filter(a => mockUser.comunidades.includes(a.comunidadId)).length;
 
@@ -362,28 +361,6 @@ export default function AvisosPage() {
             </div>
           </section>
 
-          {/* Explorar */}
-          {otrasComunidades.length > 0 && (
-            <section aria-labelledby="explorar-label">
-              <h2 id="explorar-label" className="text-[10px] font-bold text-[#566070] uppercase tracking-widest mb-3 flex items-center gap-2">
-                Explorar más deportes
-                <BellOff aria-hidden="true" className="w-3 h-3 text-[#566070]/50" />
-              </h2>
-              <p className="text-[11px] text-[#566070] mb-3 -mt-1.5">
-                No recibís avisos de estos deportes
-              </p>
-              <div className="space-y-3 opacity-80">
-                {otrasComunidades.map(c => (
-                  <ComunidadCard
-                    key={c.id}
-                    comunidad={c}
-                    esMiembro={false}
-                    onSelect={() => setComunidadActiva(c.id)}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
         </div>
       )}
     </div>
