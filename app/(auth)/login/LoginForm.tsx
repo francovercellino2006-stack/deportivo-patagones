@@ -3,6 +3,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { loginAction } from "./actions";
+import { saveSession, clearSession, type UserRole } from "@/lib/auth";
 
 type FormErrors = { email?: string; password?: string };
 
@@ -55,6 +56,8 @@ export function LoginForm() {
         setServerError(result.error);
         return;
       }
+      clearSession();
+      saveSession({ role: (result.role ?? "socio") as UserRole });
       const dest = result.role === "admin" ? "/admin"
                  : result.role === "profe" ? "/mi-panel"
                  : "/inicio";

@@ -2,13 +2,14 @@
 import { useState, useTransition } from "react";
 import { ChevronDown, ChevronUp, LogIn, Shield, Loader2 } from "lucide-react";
 import { loginAction } from "./actions";
+import { saveSession, clearSession, type UserRole } from "@/lib/auth";
 
 export function DemoAccess() {
   const [profeOpen, setProfeOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState<string | null>(null);
 
-  function demoLogin(email: string, password: string, dest: string, label: string) {
+  function demoLogin(email: string, password: string, dest: string, label: string, role: UserRole) {
     setLoading(label);
     startTransition(async () => {
       const result = await loginAction(email, password);
@@ -17,6 +18,8 @@ export function DemoAccess() {
         setLoading(null);
         return;
       }
+      clearSession();
+      saveSession({ role });
       window.location.href = dest;
     });
   }
@@ -27,7 +30,7 @@ export function DemoAccess() {
       <button
         type="button"
         disabled={isPending}
-        onClick={() => demoLogin("socio1@dp.ar", "Demo1234!", "/inicio", "socio")}
+        onClick={() => demoLogin("socio1@dp.ar", "Demo1234!", "/inicio", "socio", "socio")}
         className="w-full h-11 border border-[#E8ECF4] bg-white text-[#4A5568] rounded-2xl text-sm font-semibold hover:bg-[#F0F3FA] transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
       >
         {loading === "socio"
@@ -40,7 +43,7 @@ export function DemoAccess() {
       <button
         type="button"
         disabled={isPending}
-        onClick={() => demoLogin("admin@dp.ar", "Admin1234!", "/admin", "admin")}
+        onClick={() => demoLogin("admin@dp.ar", "Admin1234!", "/admin", "admin", "admin")}
         className="w-full h-11 border border-[#E8ECF4] bg-white text-[#4A5568] rounded-2xl text-sm font-semibold hover:bg-[#F0F3FA] transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
       >
         {loading === "admin"
@@ -53,7 +56,7 @@ export function DemoAccess() {
       <button
         type="button"
         disabled={isPending}
-        onClick={() => demoLogin("profe1@dp.ar", "Demo1234!", "/mi-panel", "profe")}
+        onClick={() => demoLogin("profe1@dp.ar", "Demo1234!", "/mi-panel", "profe", "profe")}
         className="w-full h-11 border border-[#E8ECF4] bg-white text-[#4A5568] rounded-2xl text-sm font-semibold hover:bg-[#F0F3FA] transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
       >
         {loading === "profe"
