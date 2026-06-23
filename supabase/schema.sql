@@ -7,7 +7,7 @@
 create table if not exists profiles (
   id             uuid primary key references auth.users(id) on delete cascade,
   role           text not null default 'socio'
-                   check (role in ('socio', 'profe', 'admin')),
+                   check (role in ('socio', 'profe', 'admin', 'baja')),
   name           text not null,
   socio_number   text,
   category       text,

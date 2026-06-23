@@ -49,3 +49,34 @@ export async function actualizarDeportes(socioId: string, deportes: string[]) {
 
   revalidatePath("/admin/inscripciones");
 }
+
+export async function darDeBaja(socioId: string) {
+  const user = await getAdminOrThrow();
+  const admin = createAdminClient();
+
+  const { data: socio } = await admin
+    .from("profiles")
+    .select("name, sports, role")
+    .eq("id", socioId)
+    .single();
+
+  const { error } = await admin
+    .from("profiles")
+    .update({ role: "baja", sports: [] })
+    .eq("id", socioId);
+
+  if (error) throw error;
+
+  await admin.from("audit_log").insert({
+    user_id: user.id,
+    action: "SOCIO_DADO_DE_BAJA",
+    entity: "profiles",
+    entity_id: socioId,
+    metadata: {
+      socio_name: socio?.name,
+      deportes_previos: socio?.sports ?? [],
+    },
+  });
+
+  revalidatePath("/admin/inscripciones");
+}

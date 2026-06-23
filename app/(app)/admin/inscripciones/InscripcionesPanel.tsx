@@ -1,10 +1,10 @@
 "use client";
 import { useState, useTransition } from "react";
-import { Search, Check, X, Loader2, ChevronDown, ChevronUp, Users, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import { Search, Check, X, Loader2, ChevronDown, ChevronUp, Users, CheckCircle2, Clock, AlertCircle, UserX } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
-import { actualizarDeportes } from "./actions";
+import { actualizarDeportes, darDeBaja } from "./actions";
 import type { Profile, CuotaEstado } from "@/lib/supabase/types";
 
 export type SocioConCuota = Profile & {
@@ -46,6 +46,7 @@ function SocioEditor({
   const current = socio.sports ?? [];
   const [selected, setSelected] = useState<string[]>(current);
   const [isPending, startTransition] = useTransition();
+  const [confirmBaja, setConfirmBaja] = useState(false);
 
   const changed = JSON.stringify(selected.sort()) !== JSON.stringify([...current].sort());
 
@@ -125,6 +126,53 @@ function SocioEditor({
             "Guardar cambios"
           )}
         </button>
+      </div>
+
+      {/* Dar de baja */}
+      <div className="mt-4 pt-3 border-t border-dashed border-[#E8ECF4]">
+        {!confirmBaja ? (
+          <button
+            type="button"
+            onClick={() => setConfirmBaja(true)}
+            disabled={isPending}
+            className="flex items-center gap-1.5 text-[11px] font-semibold text-[#C8102E]/70 hover:text-[#C8102E] transition-colors"
+          >
+            <UserX className="w-3.5 h-3.5" /> Dar de baja a {socio.name.split(" ")[0]}
+          </button>
+        ) : (
+          <div className="bg-[#C8102E]/5 border border-[#C8102E]/20 rounded-xl p-3">
+            <p className="text-xs font-bold text-[#C8102E] mb-1">
+              ¿Dar de baja a {socio.name}?
+            </p>
+            <p className="text-[11px] text-[#566070] mb-3">
+              Se eliminan sus deportes y pierde acceso a la app. Esta acción queda registrada.
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setConfirmBaja(false)}
+                disabled={isPending}
+                className="flex-1 h-9 rounded-lg border border-[#E8ECF4] text-xs font-semibold text-[#566070] hover:bg-[#F0F3FA] transition-colors"
+              >
+                No, cancelar
+              </button>
+              <button
+                type="button"
+                disabled={isPending}
+                onClick={() => startTransition(async () => {
+                  await darDeBaja(socio.id);
+                  onClose();
+                })}
+                className="flex-1 h-9 rounded-lg bg-[#C8102E] text-white text-xs font-bold hover:bg-[#A00D24] transition-colors disabled:opacity-60 flex items-center justify-center gap-1"
+              >
+                {isPending
+                  ? <><Loader2 className="w-3 h-3 animate-spin" /> Procesando...</>
+                  : <><UserX className="w-3 h-3" /> Sí, dar de baja</>
+                }
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
