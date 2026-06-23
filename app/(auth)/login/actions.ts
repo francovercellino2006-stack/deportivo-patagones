@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 
 export async function loginAction(email: string, password: string) {
   const supabase = await createClient();
+  await supabase.auth.signOut();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) return { error: error.message, role: null };
