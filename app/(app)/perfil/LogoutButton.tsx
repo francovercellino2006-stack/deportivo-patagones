@@ -1,12 +1,15 @@
 "use client";
-import { LogOut } from "lucide-react";
+import { useState } from "react";
+import { LogOut, Loader2 } from "lucide-react";
 import { useAuth } from "@/components/providers/auth-provider";
 
 export function LogoutButton() {
   const { logout } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    setLoading(true);
+    await logout();
     window.location.href = "/login";
   }
 
@@ -14,10 +17,16 @@ export function LogoutButton() {
     <button
       type="button"
       onClick={handleLogout}
-      className="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl border border-[#E8ECF4] bg-white text-[#C8102E] hover:bg-red-50 transition-colors"
+      disabled={loading}
+      className="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl border border-[#E8ECF4] bg-white text-[#C8102E] hover:bg-red-50 transition-colors disabled:opacity-60"
     >
-      <LogOut aria-hidden="true" className="w-4 h-4" />
-      <span className="text-sm font-semibold">Cerrar sesión</span>
+      {loading
+        ? <Loader2 aria-hidden="true" className="w-4 h-4 animate-spin" />
+        : <LogOut   aria-hidden="true" className="w-4 h-4" />
+      }
+      <span className="text-sm font-semibold">
+        {loading ? "Cerrando sesión..." : "Cerrar sesión"}
+      </span>
     </button>
   );
 }
