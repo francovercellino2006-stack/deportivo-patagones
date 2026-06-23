@@ -24,12 +24,7 @@ export default function LandingPage() {
               <p className="text-white/50 text-[10px]">Club Atlético · Patagones</p>
             </div>
           </div>
-          <Link
-            href="/login"
-            className="flex items-center gap-1.5 bg-vc-red text-white text-sm font-semibold px-4 h-9 rounded-full hover:bg-vc-red-hover transition-colors"
-          >
-            Ingresar <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div />
         </div>
       </header>
 
@@ -60,12 +55,6 @@ export default function LandingPage() {
             className="flex items-center gap-2 bg-vc-red text-white font-semibold px-6 h-12 rounded-full text-base hover:bg-vc-red-hover transition-colors w-full sm:w-auto justify-center"
           >
             Acceder al club <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link
-            href="/inicio"
-            className="flex items-center gap-2 border border-white/20 text-white font-medium px-6 h-12 rounded-full text-base hover:bg-white/10 transition-colors w-full sm:w-auto justify-center"
-          >
-            Ver demo
           </Link>
         </div>
       </section>
