@@ -57,7 +57,7 @@ export default function AdminPage() {
         {[
           { label: "Publicar noticia", icon: Newspaper, href: "/admin/noticias/nueva", color: "text-blue-600 bg-blue-100 dark:bg-blue-900/20" },
           { label: "Crear evento", icon: Trophy, href: "/admin/eventos/nuevo", color: "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20" },
-          { label: "Gestionar socios", icon: Users, href: "/admin/socios", color: "text-purple-600 bg-purple-100 dark:bg-purple-900/20" },
+          { label: "Inscripciones", icon: Users, href: "/admin/inscripciones", color: "text-purple-600 bg-purple-100 dark:bg-purple-900/20" },
           { label: "Control de cuotas", icon: DollarSign, href: "/admin/cuotas", color: "text-green-600 bg-green-100 dark:bg-green-900/20" },
         ].map(({ label, icon: Icon, href, color }) => (
           <Link key={label} href={href}>
