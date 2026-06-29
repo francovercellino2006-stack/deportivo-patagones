@@ -10,12 +10,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge, categoryBadgeVariant } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
-  mockUser, mockNoticias, mockEventos, mockCuotas,
-  mockPartidos, mockAvisos, mockProfesores, mockComunidades, type AvisoTipo
+  mockUser, mockCuotas, mockComunidades, type AvisoTipo
 } from "@/lib/mock-data";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { formatDate, formatShortDate, formatCurrency } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Inicio" };
+export const revalidate = 60;
 
 const quickLinks = [
   { href: "/noticias",     label: "Noticias",   icon: Newspaper,  bg: "bg-[#15803D]/8",  color: "text-[#15803D]"  },
@@ -42,9 +43,19 @@ const categoryGradient: Record<string, string> = {
   "Cuotas":        "from-[#d97706] to-[#f59e0b]",
 };
 
-export default function InicioPage() {
-  const proximoPartido  = mockPartidos[0];
-  const noticiaDestacada = mockNoticias.find(n => n.pinned) ?? mockNoticias[0];
+export default async function InicioPage() {
+  const supabase = createAdminClient();
+
+  const { data: partidos } = await supabase.from("partidos").select("*").order("fecha").limit(1);
+  const proximoPartido = partidos?.[0] ?? null;
+
+  const { data: noticias } = await supabase.from("noticias").select("*").order("created_at", { ascending: false }).limit(5);
+  const allNoticias = noticias ?? [];
+  const noticiaDestacada = allNoticias.find((n: any) => n.pinned) ?? allNoticias[0] ?? null;
+
+  const { data: avisos } = await supabase.from("avisos").select("*").order("created_at", { ascending: false }).limit(5);
+  const allAvisos = avisos ?? [];
+
   const pendiente = mockCuotas.historial.find(c => c.estado === "pendiente");
   const cuotaAlDia = mockCuotas.status === "al-dia" && !pendiente;
 
@@ -97,7 +108,7 @@ export default function InicioPage() {
               <div className="flex flex-col items-center gap-2 flex-1">
                 <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center">
                   <span className="text-white font-black text-lg">
-                    {proximoPartido.visitante.split(" ").map(w => w[0]).slice(0,2).join("")}
+                    {proximoPartido.visitante.split(" ").map((w: string) => w[0]).slice(0,2).join("")}
                   </span>
                 </div>
                 <span className="text-xs font-bold text-white text-center leading-tight">{proximoPartido.visitante}</span>
@@ -173,8 +184,8 @@ export default function InicioPage() {
               <CardContent className="py-3.5">
                 <p className="font-bold text-sm leading-snug text-[#0D1117] line-clamp-2">{noticiaDestacada.title}</p>
                 <p className="text-xs text-[#566070] mt-1 line-clamp-2">{noticiaDestacada.excerpt}</p>
-                <time dateTime={noticiaDestacada.date} className="block text-[10px] text-[#566070] mt-2">
-                  {formatShortDate(noticiaDestacada.date)}
+                <time dateTime={noticiaDestacada.created_at} className="block text-[10px] text-[#566070] mt-2">
+                  {formatShortDate(noticiaDestacada.created_at)}
                 </time>
               </CardContent>
             </Card>
@@ -183,13 +194,13 @@ export default function InicioPage() {
       )}
 
       {/* More news */}
-      {mockNoticias.filter(n => !n.pinned).length > 0 && (
+      {allNoticias.filter((n: any) => !n.pinned).length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-xs font-semibold text-[#566070] uppercase tracking-wider">Más noticias</h2>
           </div>
           <div className="space-y-2">
-            {mockNoticias.filter(n => !n.pinned).slice(0, 3).map(noticia => (
+            {allNoticias.filter((n: any) => !n.pinned).slice(0, 3).map((noticia: any) => (
               <Link key={noticia.id} href={`/noticias/${noticia.id}`}>
                 <Card className="hover:shadow-[0_4px_12px_0_rgb(0_0_0/0.07)] transition-shadow">
                   <CardContent className="py-3.5 flex items-center gap-3">
@@ -197,7 +208,7 @@ export default function InicioPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <Badge variant={categoryBadgeVariant(noticia.category)} className="text-[10px] px-1.5 py-0">{noticia.category}</Badge>
-                        <time dateTime={noticia.date} className="text-[10px] text-[#566070]">{formatShortDate(noticia.date)}</time>
+                        <time dateTime={noticia.created_at} className="text-[10px] text-[#566070]">{formatShortDate(noticia.created_at)}</time>
                       </div>
                       <p className="text-sm font-semibold text-[#0D1117] leading-snug line-clamp-1">{noticia.title}</p>
                     </div>
@@ -211,31 +222,31 @@ export default function InicioPage() {
       )}
 
       {/* Coach updates */}
-      {mockAvisos.length > 0 && (
+      {allAvisos.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-xs font-semibold text-[#566070] uppercase tracking-wider">Profes avisaron</h2>
             <Link href="/avisos" className="text-xs text-[#15803D] font-semibold">Ver todo →</Link>
           </div>
           <div className="space-y-2">
-            {mockAvisos
-              .filter(a => mockUser.comunidades.includes(a.comunidadId))
+            {allAvisos
+              .filter((a: any) => mockUser.comunidades.includes(a.comunidad_id))
               .slice(0, 3)
-              .map(aviso => {
-              const profe = mockProfesores.find(p => p.id === aviso.profesorId);
-              const cfg = tipoCfg[aviso.tipo];
+              .map((aviso: any) => {
+              const cfg = tipoCfg[aviso.tipo as AvisoTipo] ?? tipoCfg.general;
+              const initials = aviso.autor_name?.split(" ").map((w: string) => w[0]).join("").slice(0, 2) ?? "??";
               return (
                 <Link key={aviso.id} href="/avisos">
                   <Card className="hover:shadow-[0_4px_12px_0_rgb(0_0_0/0.07)] transition-shadow">
                     <CardContent className="py-3.5 flex items-start gap-3">
                       <Avatar className="w-9 h-9 shrink-0 ring-2 ring-[#E8ECF4]">
                         <AvatarFallback className="bg-[#15803D]/10 text-[#15803D] text-xs font-bold">
-                          {profe?.initials ?? "??"}
+                          {initials}
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-xs font-bold text-[#0D1117]">{aviso.profesorName}</span>
+                          <span className="text-xs font-bold text-[#0D1117]">{aviso.autor_name}</span>
                           <span className="text-[10px] text-[#566070]">· {aviso.deporte}</span>
                         </div>
                         <p className="text-sm font-semibold text-[#0D1117] line-clamp-1">{aviso.titulo}</p>
